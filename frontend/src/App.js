@@ -1,3 +1,4 @@
+import './bootstrap.css';
 import './App.css';
 import TodoApp from "./components/todo/TodoApp";
 

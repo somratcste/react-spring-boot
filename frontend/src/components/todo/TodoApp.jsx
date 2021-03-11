@@ -4,15 +4,18 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
 class TodoApp extends Component {
     render() {
         return (
-            <div className="TodoApp">
+            <div className="container">
                 <Router>
-                    <Switch>
-                        <Route exact path="/" component={LoginComponent} />
-                        <Route path="/login" component={LoginComponent} />
-                        <Route path="/welcome/:name" component={WelcomeComponent} />
-                        <Route path="/todos" component={ListTodosComponent} />
-                        <Route component={ErrorComponent} />
-                    </Switch>
+                    <HeaderComponent />
+                        <Switch>
+                            <Route exact path="/" component={LoginComponent} />
+                            <Route path="/login" component={LoginComponent} />
+                            <Route path="/welcome/:name" component={WelcomeComponent} />
+                            <Route path="/todos" component={ListTodosComponent} />
+                            <Route path="/logout" component={LogoutComponent} />
+                            <Route component={ErrorComponent} />
+                        </Switch>
+                    <FooterComponent />
                 </Router>
             </div>
         )
@@ -60,6 +63,49 @@ class ListTodosComponent extends Component {
                     </tbody>
                 </table>
             </div>
+        )
+    }
+}
+
+class HeaderComponent extends Component {
+    render() {
+        return (
+            <header>
+                <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+                    <div><a href="http://www.somrat.info" className="navbar-brand">Github</a></div>
+                    <ul className="navbar-nav">
+                        <li><Link className="nav-link" to="/welcome/nazmul">Home</Link></li>
+                        <li><Link className="nav-link" to="/todos">Todos</Link></li>
+                    </ul>
+                    <ul className="navbar-nav navbar-collapse justify-content-end">
+                        <li><Link className="nav-link" to="/login">Login</Link></li>
+                        <li><Link className="nav-link" to="/logout">Logout</Link></li>
+                    </ul>
+                </nav>
+            </header>
+        )
+    }
+}
+
+class FooterComponent extends Component {
+    render() {
+        return (
+            <footer className="footer">
+                <span className="text-muted">All Rights Reserved 2021.</span>
+            </footer>
+        )
+    }
+}
+
+class LogoutComponent extends Component {
+    render() {
+        return (
+            <>
+                <h1>You are logged out!</h1>
+                <div className="container">
+                    Thank you for Using our Application.
+                </div>
+            </>
         )
     }
 }
