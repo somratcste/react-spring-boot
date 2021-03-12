@@ -66,4 +66,10 @@ public class AuthController {
         return ResponseEntity.ok(new ApiResponse(true, "Welcome to the Application!"));
     }
 
+    @GetMapping("/hello-world/path-variable/{name}")
+    public ResponseEntity<?> getHelloWithPathVariable(@PathVariable String name) {
+//        throw new RuntimeException("Something went wrong!");
+        return ResponseEntity.ok(new ApiResponse(true, "Welcome to " + name));
+    }
+
 }
