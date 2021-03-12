@@ -61,9 +61,9 @@ public class AuthController {
     }
 
     @GetMapping("/hello")
-    public String getHello() {
+    public ResponseEntity<?> getHello() {
         logger.info("hello");
-        return "Hello";
+        return ResponseEntity.ok(new ApiResponse(true, "Welcome to the Application!"));
     }
 
 }
