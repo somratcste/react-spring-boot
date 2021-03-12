@@ -27,6 +27,19 @@ class ListTodosComponent extends Component {
             )
     }
 
+    updateTodoClicked = id => {
+        this.props.history.push(`/todos/${id}`)
+        // TodoDataService.deleteTodo(id)
+        //     .then(
+        //         response => {
+        //             this.setState({
+        //                 todos: response.data,
+        //                 message: `Delete of todo ${id} is Successful!`
+        //             })
+        //         }
+        //     )
+    }
+
     refreshTodos() {
         TodoDataService.retrieveAllTodos()
             .then(
@@ -50,6 +63,7 @@ class ListTodosComponent extends Component {
                             <th>description</th>
                             <th>Target Date</th>
                             <th>Is Completed?</th>
+                            <th>Update</th>
                             <th>Delete</th>
                         </tr>
                         </thead>
@@ -61,6 +75,7 @@ class ListTodosComponent extends Component {
                                         <td>{todo.description}</td>
                                         <td>{todo.targetDate.toString()}</td>
                                         <td>{todo.done.toString()}</td>
+                                        <td><button onClick={() => this.updateTodoClicked(todo.id)} className="btn btn-success">Update</button></td>
                                         <td><button onClick={() => this.deleteTodoClicked(todo.id)} className="btn btn-warning">Delete</button></td>
                                     </tr>
                             )
