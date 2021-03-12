@@ -19,4 +19,9 @@ public class TodoController {
     public List<Todo> index() {
         return todoService.index();
     }
+
+    @DeleteMapping("/{id}")
+    public List<Todo> destroy(@PathVariable Long id) {
+        return todoService.destroy(id);
+    }
 }
