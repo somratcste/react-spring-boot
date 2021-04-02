@@ -6,6 +6,10 @@ class TodoDataService {
         return axios.get('http://localhost:8080/api/todos/');
     }
 
+    retrieveTodo(id) {
+        return axios.get(`http://localhost:8080/api/todos/${id}`);
+    }
+
     deleteTodo(id) {
         return axios.delete(`http://localhost:8080/api/todos/${id}`);
     }
