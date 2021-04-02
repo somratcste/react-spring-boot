@@ -14,8 +14,12 @@ class TodoComponent extends Component {
         }
     }
 
-    onSubmit = value => {
-        console.log(value)
+    onSubmit = values => {
+        TodoDataService.updateTodo(this.state.id, {
+            id: this.state.id,
+            description: values.description,
+            targetDate: values.targetDate
+        }).then(() => this.props.history.push('/todos'))
     }
 
     componentDidMount() {

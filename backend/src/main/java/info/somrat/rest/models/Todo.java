@@ -12,7 +12,7 @@ public class Todo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Setter(AccessLevel.PROTECTED)
+    @Setter
     private Long id;
 
     @Column(nullable = false, length = 89)

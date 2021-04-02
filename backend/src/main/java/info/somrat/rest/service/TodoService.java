@@ -17,13 +17,26 @@ public class TodoService {
         return todoRepository.findAll();
     }
 
-    public Optional<Todo> show(Long id) {
-       Optional<Todo> todo = todoRepository.findById(id);
+    public Todo show(Long id) {
+       Todo todo = todoRepository.findOneById(id);
        return todo;
     }
 
     public List<Todo> destroy(Long id) {
         todoRepository.deleteById(id);
         return index();
+    }
+
+    public Todo update(Long id, Todo todo) {
+        System.out.print(todo.toString());
+        Todo todoFromDb = todoRepository.findOneById(id);
+        todoFromDb.setDescription(todo.getDescription());
+        todoFromDb.setTargetDate(todo.getTargetDate());
+        todoFromDb.setUsername("nazmul");
+        return todoRepository.save(todoFromDb);
+    }
+
+    public Todo save(Todo todo) {
+        return todoRepository.save(todo);
     }
 }
