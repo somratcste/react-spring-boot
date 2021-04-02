@@ -37,6 +37,7 @@ public class TodoService {
     }
 
     public Todo save(Todo todo) {
+        todo.setUsername("nazmul");
         return todoRepository.save(todo);
     }
 }

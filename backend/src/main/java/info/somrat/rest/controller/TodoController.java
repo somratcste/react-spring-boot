@@ -22,6 +22,11 @@ public class TodoController {
         return todoService.index();
     }
 
+    @PostMapping("/")
+    public Todo update(@RequestBody Todo todo) {
+        return todoService.save(todo);
+    }
+
     @GetMapping("/{id}")
     public Todo show(@PathVariable Long id) {
         return todoService.show(id);
@@ -30,11 +35,6 @@ public class TodoController {
     @PutMapping("/{id}")
     public Todo update(@PathVariable Long id, @RequestBody Todo todo) {
         return todoService.update(id, todo);
-    }
-
-    @PostMapping("/")
-    public Todo update(@Valid Todo todo) {
-        return todoService.save(todo);
     }
 
     @DeleteMapping("/{id}")

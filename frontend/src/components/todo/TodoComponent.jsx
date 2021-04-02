@@ -15,14 +15,24 @@ class TodoComponent extends Component {
     }
 
     onSubmit = values => {
-        TodoDataService.updateTodo(this.state.id, {
-            id: this.state.id,
-            description: values.description,
-            targetDate: values.targetDate
-        }).then(() => this.props.history.push('/todos'))
+        if (this.state.id == -1) {
+            TodoDataService.createTodo({
+                description: values.description,
+                targetDate: values.targetDate
+            }).then(() => this.props.history.push('/todos'))
+        } else {
+            TodoDataService.updateTodo(this.state.id, {
+                id: this.state.id,
+                description: values.description,
+                targetDate: values.targetDate
+            }).then(() => this.props.history.push('/todos'))
+        }
     }
 
     componentDidMount() {
+        if (this.state.id === -1) {
+            return;
+        }
         TodoDataService.retrieveTodo(this.state.id)
             .then(response=> {
                 this.setState({
