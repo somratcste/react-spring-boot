@@ -1,7 +1,10 @@
+import axios from "axios";
+
 class AuthenticationService {
 
     registerSuccessfulLogin(username, password) {
         sessionStorage.setItem('authenticatedUser', username);
+        this.setupAxiosInterceptors();
     }
 
     logout() {
@@ -22,6 +25,17 @@ class AuthenticationService {
             return '';
         }
         return userName;
+    }
+
+    setupAxiosInterceptors() {
+        axios.interceptors.request.use(
+            (config) => {
+                if (this.isUserLoggedIn()) {
+                    config.headers.authorization = 'somrat'
+                }
+                return config;
+            }
+        )
     }
 }
 
