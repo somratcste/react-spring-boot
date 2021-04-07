@@ -1,15 +1,12 @@
 import axios from "axios";
+import {API_URL} from "../../Constants";
+
+export const TOKEN_SESSION_ATTRIBUTE_NAME = 'token'
 
 class AuthenticationService {
 
-    registerSuccessfulLogin(username, password) {
-        let basicAuthHeader = 'somrat'
-        sessionStorage.setItem('authenticatedUser', username);
-        this.setupAxiosInterceptors(basicAuthHeader);
-    }
-
     registerSuccessfulLoginForJwt(token) {
-        sessionStorage.setItem('authenticatedUser', token);
+        sessionStorage.setItem(TOKEN_SESSION_ATTRIBUTE_NAME, token);
         this.setupAxiosInterceptors(this.createJWTToken(token));
     }
 
@@ -18,27 +15,27 @@ class AuthenticationService {
     }
 
     logout() {
-        sessionStorage.removeItem('authenticatedUser')
+        sessionStorage.removeItem(TOKEN_SESSION_ATTRIBUTE_NAME)
     }
 
     isUserLoggedIn() {
-        let user = sessionStorage.getItem('authenticatedUser')
+        let user = sessionStorage.getItem(TOKEN_SESSION_ATTRIBUTE_NAME)
         if (user === null) {
             return false;
         }
         return true;
     }
 
-    getLoggedInUserName() {
-        let userName = sessionStorage.getItem('authenticatedUser')
-        if (userName === null) {
+    getLoggedInToken() {
+        let token = sessionStorage.getItem(TOKEN_SESSION_ATTRIBUTE_NAME)
+        if (token === null) {
             return '';
         }
-        return userName;
+        return token;
     }
 
     executeJwtAuthenticationService(username, password) {
-        return axios.post('http://localhost:8080/api/auth/signin', {
+        return axios.post(`${API_URL}/api/auth/signin`, {
             username,
             password
         })
